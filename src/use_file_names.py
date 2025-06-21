@@ -53,15 +53,14 @@ def get_names_list_02(use_file_name: str) -> list[str]:
     return result_list_names
 
 
-def get_list_of_lang_names(use_file_name: str, use_lang: str = "rus") -> list[str]:
+def get_list_of_lang_names(use_names_list: list[str], use_lang: str = "rus") -> list[str]:
     """
-    Функция принимает путь к файлу с именами
+    Функция принимает список с именами
     и формирует список с именами только на английском или на русском языке
-    :param use_file_name: путь к файлу с именами
+    :param use_names_list: список с именами
     :param use_lang: краткое наименование языка rus | eng
     :return: список с именами только на английском или на русском языке
     """
-    names_list = get_names_list_02(use_file_name)
     result_list = []
 
     if use_lang == "eng":
@@ -69,7 +68,7 @@ def get_list_of_lang_names(use_file_name: str, use_lang: str = "rus") -> list[st
     else:
         lang_chr = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 
-    for i in names_list:
+    for i in use_names_list:
         if i[0].lower() in lang_chr:
             result_list.append(i)
 

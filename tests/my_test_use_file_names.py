@@ -9,10 +9,12 @@ print(root_path)
 
 file_of_names = os.path.join(root_path, "data\\names.txt")
 print(file_of_names)
-print(use_file_names.get_names_list(file_of_names))
 
-eng_names_list = use_file_names.get_list_of_lang_names(file_of_names, "eng")
-rus_names_list = use_file_names.get_list_of_lang_names(file_of_names)
+clean_list_names = use_file_names.get_names_list_02(file_of_names)
+print(clean_list_names)
+
+eng_names_list = use_file_names.get_list_of_lang_names(clean_list_names, "eng")
+rus_names_list = use_file_names.get_list_of_lang_names(clean_list_names)
 print(eng_names_list)
 print(rus_names_list)
 
