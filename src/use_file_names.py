@@ -27,6 +27,32 @@ def get_names_list(use_file_name: str) -> list[str]:
     return result_list_names
 
 
+def get_names_list_02(use_file_name: str) -> list[str]:
+    """
+    Функция принимает имя файла и возвращает список имен, содержащихся в файле,
+    игнорируя знаки препинания пробелы и цыфры
+    :param use_file_name: имя файла
+    :return: список имен из указанного файла
+    """
+    if not os.path.exists(use_file_name):
+        return ["Такого файла не существует."]
+
+    result_list_names = []
+
+    with open(use_file_name, "r", encoding="utf-8") as file:
+        list_mames_of_file = file.readlines()
+
+    for i in list_mames_of_file:
+        tmp_name = ""
+        for j in i:
+            if j.isalpha():
+                tmp_name += j
+        if tmp_name != "":
+            result_list_names.append(tmp_name)
+
+    return result_list_names
+
+
 def get_list_of_lang_names(use_file_name: str, use_lang: str = "rus") -> list[str]:
     """
     Функция принимает путь к файлу с именами
@@ -35,7 +61,7 @@ def get_list_of_lang_names(use_file_name: str, use_lang: str = "rus") -> list[st
     :param use_lang: краткое наименование языка rus | eng
     :return: список с именами только на английском или на русском языке
     """
-    names_list = get_names_list(use_file_name)
+    names_list = get_names_list_02(use_file_name)
     result_list = []
 
     if use_lang == "eng":
