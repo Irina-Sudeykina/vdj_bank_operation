@@ -28,6 +28,6 @@ def mask_account_card(acc_card: str) -> str:
     :return: строка с замаскированным значением номера карты/счета
     """
     if acc_card[-20:].isdigit():
-        return f"{acc_card[:(len(acc_card) - 20)]}{get_mask_account(acc_card[-20:])}"
+        return f"{acc_card[:(len(acc_card) - 20)]}{get_mask_account(int(acc_card[-20:]))}"
     else:
-        return f"{acc_card[:(len(acc_card) - 16)]}{get_mask_card_number(acc_card[-16:])}"
+        return f"{acc_card[:(len(acc_card) - 16)]}{get_mask_card_number(int(acc_card[-16:]))}"
