@@ -27,7 +27,7 @@ def get_names_list(use_file_name: str) -> list[str]:
     return result_list_names
 
 
-def get_list_of_lang_names(use_file_name: str, use_lang="rus") -> list[str]:
+def get_list_of_lang_names(use_file_name: str, use_lang: str = "rus") -> list[str]:
     """
     Функция принимает путь к файлу с именами
     и формирует список с именами только на английском или на русском языке
@@ -48,3 +48,15 @@ def get_list_of_lang_names(use_file_name: str, use_lang="rus") -> list[str]:
             result_list.append(i)
 
     return result_list
+
+
+def set_list_to_file(use_list: list[str], use_file_name: str) -> None:
+    """
+    Функция принимает список строк и записывает его в файл
+    :param use_list: список строк
+    :param use_file_name: путь к файлу для записи списка
+    :return: функция ничего не возвращает
+    """
+    with open(use_file_name, "w", encoding="utf-8") as file:
+        for i in use_list:
+            file.write(i + "\n")
