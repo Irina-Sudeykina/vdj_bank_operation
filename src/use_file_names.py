@@ -12,7 +12,7 @@ def get_names_list(use_file_name: str) -> list[str]:
         return ["Такого файла не существует."]
 
     result_list_names = []
-    del_chr = "0123456789,.|/!()[]{};:'&?@#№%^&*"
+    del_chr = "0123456789,. |/!()[]{};:'&?@#№%^&*"
 
     with open(use_file_name, "r", encoding="utf-8") as file:
         list_mames_of_file = file.readlines()
@@ -25,3 +25,26 @@ def get_names_list(use_file_name: str) -> list[str]:
             result_list_names.append(tmp_name)
 
     return result_list_names
+
+
+def get_list_of_lang_names(use_file_name: str, use_lang="rus") -> list[str]:
+    """
+    Функция принимает путь к файлу с именами
+    и формирует список с именами только на английском или на русском языке
+    :param use_file_name: путь к файлу с именами
+    :param use_lang: краткое наименование языка rus | eng
+    :return: список с именами только на английском или на русском языке
+    """
+    names_list = get_names_list(use_file_name)
+    result_list = []
+
+    if use_lang == "eng":
+        lang_chr = "abcdefghijklmnopqrstuvwxyz"
+    else:
+        lang_chr = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+
+    for i in names_list:
+        if i[0].lower() in lang_chr:
+            result_list.append(i)
+
+    return result_list
