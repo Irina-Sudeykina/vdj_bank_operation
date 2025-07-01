@@ -32,3 +32,7 @@ if __name__ == "__main__":
     print(processing.filter_by_state(operation_list))
     print(processing.filter_by_state(operation_list, "test"))
     print(processing.filter_by_state(operation_list, "executed"))
+
+    print(processing.sort_by_date(operation_list, True))
+    print(processing.sort_by_date(operation_list, False))
+    print(processing.sort_by_date(operation_list))
