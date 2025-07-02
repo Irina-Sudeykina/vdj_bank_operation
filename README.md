@@ -10,7 +10,7 @@
  git clone https://github.com/Irina-Sudeykina/vdj_bank_operation.git
  ```
 
- 1. Установите зависимости:
+ 2. Установите зависимости:
  ```
  pip install -r requirements.txt
  ```
