@@ -103,7 +103,7 @@
  02.07.2025
  ```
 
- ### Функция **filter_by_state**(use_list_operation: list[dict], state: str = "EXECUTED") -> list[dict]
+ ### Функция **filter_by_state**(operation_list: list[dict], state: str = "EXECUTED") -> list[dict]
  Функция принимает список словарей
  и опционально значение для ключа state (по умолчанию 'EXECUTED').
  Функция возвращает новый список словарей, содержащий только те словари,
@@ -142,7 +142,7 @@
  {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]
  ```
 
- ### Функция **sort_by_date**(use_list_operation: list[dict], sort_order: bool = True) -> list[dict]
+ ### Функция **sort_by_date**(operation_list: list[dict], is_reverse_sort: bool = True) -> list[dict]
  Функция принимает список словарей - банковские операции
  и необязательный параметр, задающий порядок сортировки (по умолчанию — убывание).
  Функция возвращает новый список, отсортированный по дате (date).
