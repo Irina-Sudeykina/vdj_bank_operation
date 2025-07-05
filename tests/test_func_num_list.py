@@ -23,7 +23,7 @@ def test_get_intersect_empty_num_list() -> None:
 
 def test_get_intersect_num_list_02() -> None:
     """
-    Проверка фнкции get_intersect_num_list, которая возвращает список одинаковых чисел
+    Проверка фнкции get_intersect_num_list_02, которая возвращает список одинаковых чисел
     когда оба списка чисел не пустые
     :return: ожидаем список одинаковых чисел
     """
@@ -32,7 +32,7 @@ def test_get_intersect_num_list_02() -> None:
 
 def test_get_intersect_empty_num_list_02() -> None:
     """
-    Проверка фнкции get_intersect_num_list, которая возвращает список одинаковых чисел
+    Проверка фнкции get_intersect_num_list_02, которая возвращает список одинаковых чисел
     когда один или оба списка пустые
     :return: пустой список
     """
