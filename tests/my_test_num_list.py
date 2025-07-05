@@ -11,19 +11,27 @@ def sum_of_values(a: Union[int, float], b: Union[int, float]) -> Union[int, floa
 
 
 print(sum_of_values(4, 7.6))
+assert sum_of_values(4, 7.6) == 11.6
 
 num_list1 = [1, 3, 5, 7]
 num_list2 = [3, 5, 9, 1]
 
 print(func_num_list.get_intersect_num_list(num_list1, num_list2))
 print(func_num_list.get_intersect_num_list_02(num_list1, num_list2))
+assert func_num_list.get_intersect_num_list(num_list1, num_list2) == [1, 3, 5]
+assert func_num_list.get_intersect_num_list_02(num_list1, num_list2) == [1, 3, 5]
+
 print(func_num_list.get_unicue_num_list(num_list1, num_list2))
 print(func_num_list.get_unicue_num_list_02(num_list1, num_list2))
+assert func_num_list.get_unicue_num_list(num_list1, num_list2) == [7, 9]
+assert func_num_list.get_unicue_num_list_02(num_list1, num_list2) == [7, 9]
 
 num_list = [121, 576, 786, 7896987]
 
 print(func_num_list.get_num_palindrom_list(num_list))
 print(func_num_list.get_num_palindrom_list_02(num_list))
+assert func_num_list.get_num_palindrom_list(num_list) == [121, 7896987]
+assert func_num_list.get_num_palindrom_list_02(num_list) == [121, 7896987]
 
 
 def get_area_of_circle(radius_of_circle: Union[int, float]) -> Union[int, float]:
