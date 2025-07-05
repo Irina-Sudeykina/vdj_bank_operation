@@ -39,3 +39,21 @@ def test_get_intersect_empty_num_list_02() -> None:
     assert func_num_list.get_intersect_num_list_02([], [3, 5, 9, 1]) == []
     assert func_num_list.get_intersect_num_list_02([1, 3, 5, 7], []) == []
     assert func_num_list.get_intersect_num_list_02([], []) == []
+
+
+def test_get_num_palindrom_list() -> None:
+    """
+    Проверка работы функции get_num_palindrom_list,
+    котарая должна возвращать список с молиндромами
+    :return: список с полиндромами
+    """
+    assert func_num_list.get_num_palindrom_list([123, 343, 78987]) == [343, 78987]
+
+
+def test_get_num_palindrom_empty_list() -> None:
+    """
+    Проверка работы функции get_num_palindrom_list,
+    котарая должна возвращать список с молиндромами
+    :return: список с полиндромами
+    """
+    assert func_num_list.get_num_palindrom_list([]) == []
