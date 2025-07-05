@@ -18,6 +18,9 @@ def test_get_names_list(cleaned_name_list: list[str]) -> None:
     assert use_file_names.get_names_list(file_of_names) == cleaned_name_list
     assert use_file_names.get_names_list_02(file_of_names) == cleaned_name_list
 
+    assert use_file_names.get_names_list("неправильный путь к файлу") == ["Такого файла не существует."]
+    assert use_file_names.get_names_list_02("неправильный путь к файлу") == ["Такого файла не существует."]
+
 
 def test_get_list_of_lang_names(
     cleaned_name_list: list[str], eng_name_list: list[str], rus_name_list: list[str]
