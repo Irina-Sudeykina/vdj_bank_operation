@@ -1,3 +1,5 @@
+# import pytest
+
 from src import func_num_list
 
 
@@ -79,6 +81,21 @@ def test_get_num_palindrom_empty_list_02() -> None:
     :return: пустой список
     """
     assert func_num_list.get_num_palindrom_list_02([]) == []
+
+
+"""
+def test_get_num_palindrom_text_list() -> None:
+    \"""
+    Проверка работы функции get_num_palindrom_list,
+    котарая должна возвращать список с полиндромами
+    когда список не пустой, но содержит не числа, а строки
+    :return: список с полиндромами
+    \"""
+    with pytest.raises(ValueError):
+        func_num_list.get_num_palindrom_list([1, 33, 'ada'])
+        func_num_list.get_num_palindrom_list(["test", 'abcd', 'ada', 5])
+
+"""
 
 
 def test_get_unicue_num_list() -> None:
