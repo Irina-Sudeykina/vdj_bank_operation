@@ -26,6 +26,13 @@ print(func_num_list.get_unicue_num_list_02(num_list1, num_list2))
 assert func_num_list.get_unicue_num_list(num_list1, num_list2) == [7, 9]
 assert func_num_list.get_unicue_num_list_02(num_list1, num_list2) == [7, 9]
 
+num_list1 = []
+num_list2 = [3, 5, 9, 1]
+
+print(func_num_list.get_unicue_num_list(num_list1, num_list2))
+print(func_num_list.get_unicue_num_list_02(num_list1, num_list2))
+
+
 num_list = [121, 576, 786, 7896987]
 
 print(func_num_list.get_num_palindrom_list(num_list))
