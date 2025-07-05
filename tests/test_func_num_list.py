@@ -1,15 +1,25 @@
-# import pytest
+import pytest
 
 from src import func_num_list
 
 
-def test_get_intersect_num_list() -> None:
+@pytest.mark.parametrize(
+    "num_list1, num_list2, expected",
+    [
+        ([1, 3, 5, 7], [3, 5, 9, 1], [1, 3, 5]),
+        ([4, 3, 5, 7], [3, 5, 9, 1], [3, 5]),
+    ],
+)
+def test_get_intersect_num_list(num_list1: list[int], num_list2: list[int], expected: list[int]) -> None:
     """
     Проверка фнкции get_intersect_num_list, которая возвращает список одинаковых чисел
     когда оба списка чисел не пустые
+    :param num_list1: список чисел 1
+    :param num_list2: список чисел 2
+    :param expected: итоговый список чисел
     :return: ожидаем список одинаковых чисел
     """
-    assert func_num_list.get_intersect_num_list([1, 3, 5, 7], [3, 5, 9, 1]) == [1, 3, 5]
+    assert func_num_list.get_intersect_num_list(num_list1, num_list2) == expected
 
 
 def test_get_intersect_empty_num_list() -> None:
