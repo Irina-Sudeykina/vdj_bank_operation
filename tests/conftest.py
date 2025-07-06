@@ -395,6 +395,7 @@ def operation_list_all() -> list[dict[str, Any]]:
     return [
         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 675436780, "state": "EXECUTED"},
         {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
         {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
     ]
@@ -409,6 +410,7 @@ def operation_list_executed() -> list[dict[str, Any]]:
     return [
         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 675436780, "state": "EXECUTED"},
     ]
 
 
@@ -433,4 +435,46 @@ def operation_list_no_state() -> list[dict[str, Any]]:
     return [
         {"id": 594226727, "date": "2018-09-12T21:27:25.241689"},
         {"id": 615064591, "date": "2018-10-14T08:21:33.419441"},
+    ]
+
+
+@pytest.fixture
+def operation_list_sort_asc() -> list[dict[str, Any]]:
+    """
+    фикстура со списком операций отсортированных в порядке возрастания
+    :return: список операций
+    """
+    return [
+        {"id": 675436780, "state": "EXECUTED"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+    ]
+
+
+@pytest.fixture
+def operation_list_sort_desc() -> list[dict[str, Any]]:
+    """
+    фикстура со списком операций отсортированных в порядке убывания
+    :return: список операций
+    """
+    return [
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 675436780, "state": "EXECUTED"},
+    ]
+
+
+@pytest.fixture
+def operation_list_no_date() -> list[dict[str, Any]]:
+    """
+    Фикстура со списком операций с отсутствующей датой
+    :return: список операций
+    """
+    return [
+        {"id": 939719570, "state": "EXECUTED"},
+        {"id": 594226727, "state": "CANCELED"},
     ]

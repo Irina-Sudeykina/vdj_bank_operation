@@ -23,4 +23,4 @@ def sort_by_date(operation_list: list[dict[str, Any]], is_reverse_sort: bool = T
     :param is_reverse_sort: необязательный параметр, задающий порядок сортировки (по умолчанию — убывание)
     :return: отсортированный по дате список словарей - банковские операции
     """
-    return sorted(operation_list, key=lambda tpl: tpl["date"], reverse=is_reverse_sort)
+    return sorted(operation_list, key=lambda tpl: tpl.get("date", ""), reverse=is_reverse_sort)
