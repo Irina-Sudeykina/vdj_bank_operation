@@ -1,3 +1,5 @@
+from datetime import date, datetime
+
 import pytest
 
 
@@ -362,3 +364,22 @@ def rus_data_file() -> str:
 Анастасия
 Виктор
 """
+
+
+@pytest.fixture
+def new_date_time() -> str:
+    """
+    Фикстура текущих даты и временив формате 2024-03-11T02:26:18.671407
+    :return: строка в формате 2024-03-11T02:26:18.671407
+    """
+    return str(datetime.now())
+
+
+@pytest.fixture
+def new_date_str() -> str:
+    """
+    Фикстура текущей даты в формате ДД.ММ.ГГГГ (11.03.2024)
+    :return: строка в формате ДД.ММ.ГГГГ (11.03.2024)
+    """
+    today = date.today()
+    return today.strftime("%d.%m.%Y")

@@ -24,4 +24,7 @@ def get_date(use_iso_date: str) -> str:
     :param use_iso_date: строка в формате 2024-03-11T02:26:18.671407
     :return: строка с датой в формате ДД.ММ.ГГГГ (11.03.2024)
     """
-    return datetime.fromisoformat(use_iso_date).strftime("%d.%m.%Y")
+    try:
+        return datetime.fromisoformat(use_iso_date).strftime("%d.%m.%Y")
+    except ValueError:
+        raise ValueError("Задан неверный формат даты")
