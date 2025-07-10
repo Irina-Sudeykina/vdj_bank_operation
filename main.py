@@ -76,3 +76,12 @@ if __name__ == "__main__":
     descriptions = generators.transaction_descriptions(transactions)
     for _ in range(3):
         print(next(descriptions))
+
+    for card_number in generators.card_number_generator(1, 5):
+        print(card_number)
+
+    for card_number in generators.card_number_generator(8, 5):
+        print(card_number)
+
+    for card_number in generators.card_number_generator(5, 5):
+        print(card_number)
