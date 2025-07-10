@@ -39,7 +39,7 @@ def card_number_generator(start: int, stop: int) -> list[str]:
     :param stop: конечное значение для генерации
     :return: номера банковских карт в формате XXXX XXXX XXXX XXXX
     """
-    result_card_numbers = (str(x).zfill(16) for x in range(start, stop + 1))
+    result_card_numbers = (str(x).zfill(16) for x in range(abs(start), abs(stop) + 1))
     result_card_numbers = (f"{x[0:4]} {x[4:9]} {x[9:13]} {x[-4:]}" for x in result_card_numbers)
 
     return list(result_card_numbers)

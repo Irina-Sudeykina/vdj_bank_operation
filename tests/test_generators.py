@@ -65,3 +65,25 @@ def test_transaction_descriptions(
 
     no_descriptions = generators.transaction_descriptions(transactions_no_description)
     assert next(no_descriptions) == ""
+
+
+@pytest.mark.parametrize(
+    "num_start, num_stop, expected",
+    [
+        (1, 3, ["0000 00000 0000 0001", "0000 00000 0000 0002", "0000 00000 0000 0003"]),
+        (7, 7, ["0000 00000 0000 0007"]),
+        (8, 5, []),
+        (-3, 4, ["0000 00000 0000 0003", "0000 00000 0000 0004"]),
+    ],
+)
+def test_card_number_generator(num_start: int, num_stop: int, expected: list[str] | None) -> None:
+    """
+    Проверка работы функции card_number_generator,
+    которая должна возвращать номера банковских карт в формате XXXX XXXX XXXX XXXX,
+    где X — цифра номера карты
+    :param num_start: начальное значение для генерации
+    :param num_stop: конечное значение для генерации
+    :param expected: номера банковских карт в формате XXXX XXXX XXXX XXXX
+    :return: номера банковских карт в формате XXXX XXXX XXXX XXXX
+    """
+    assert generators.card_number_generator(num_start, num_stop) == expected
