@@ -15,3 +15,14 @@ def filter_by_currency(transaction_list: list[dict[str, Any]], currency: str = "
         for x in transaction_list
         if x.get("operationAmount", "").get("currency", "").get("code", "").upper() == currency.upper()
     )
+
+
+def transaction_descriptions(transaction_list: list[dict[str, Any]]) -> Generator[str]:
+    """
+    Функция принимает список словарей с транзакциями
+    и возвращает описание каждой операции по очереди
+    :param transaction_list: список словарей с транзакциями
+    :return: описание каждой операции по очереди
+    """
+    for transaction in transaction_list:
+        yield transaction.get("description", "")

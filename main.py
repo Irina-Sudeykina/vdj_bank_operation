@@ -72,3 +72,7 @@ if __name__ == "__main__":
 
     rub_transactions = generators.filter_by_currency(transactions, "RUB")
     print(list(rub_transactions))
+
+    descriptions = generators.transaction_descriptions(transactions)
+    for _ in range(3):
+        print(next(descriptions))
