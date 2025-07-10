@@ -46,3 +46,22 @@ def test_filter_by_currency(
         next(transactions_no_oper_amount)
         next(transactions_no_curr)
         next(transactions_no_curr_code)
+
+
+def test_transaction_descriptions(
+    transactions_all: list[dict[str, Any]],
+    transactions_no_description: list[dict[str, Any]],
+) -> None:
+    """
+    Проверка работы функции transaction_descriptions,
+    которая должна возвращать описание каждой операции по очереди
+    :param transactions_all: Фикстура с полным списком транзакций
+    :param transactions_no_description: Фикстура со списком транзакций, где нет описания
+    :return: описание каждой операции по очереди
+    """
+    descriptions = generators.transaction_descriptions(transactions_all)
+    assert next(descriptions) == "Перевод организации"
+    assert next(descriptions) == "Перевод со счета на счет"
+
+    no_descriptions = generators.transaction_descriptions(transactions_no_description)
+    assert next(no_descriptions) == ""
