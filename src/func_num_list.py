@@ -6,6 +6,9 @@ def get_intersect_num_list(num_list1: list[int], num_list2: list[int]) -> list[i
     :param num_list2: список чисел 2
     :return: список, стодержащий только те числа, которые сть в обоих списках
     """
+    if (len(num_list1) == 0) or (len(num_list2) == 0):
+        return []
+
     return list(set(num_list1).intersection(set(num_list2)))
 
 
