@@ -539,7 +539,7 @@ def transactions_all() -> list[dict[str, Any]]:
 def usd_transaction_one() -> dict[str, Any]:
     """
     Фикстура с первой транзакцией в валюте USD
-    :return: список транзакций
+    :return: транзакция
     """
     return {
         "id": 939719570,
@@ -555,8 +555,8 @@ def usd_transaction_one() -> dict[str, Any]:
 @pytest.fixture
 def usd_transaction_two() -> dict[str, Any]:
     """
-    Фикстура с полным списком транзакций
-    :return: список транзакций
+    Фикстура со второй транзакцией в валюте USD
+    :return: транзакция
     """
     return {
         "id": 142264268,
@@ -567,3 +567,133 @@ def usd_transaction_two() -> dict[str, Any]:
         "from": "Счет 19708645243227258542",
         "to": "Счет 75651667383060284188",
     }
+
+
+@pytest.fixture
+def rub_transaction_one() -> dict[str, Any]:
+    """
+    Фикстура с первой транзакцией в валюте RUB
+    :return: транзакция
+    """
+    return {
+        "id": 873106923,
+        "state": "EXECUTED",
+        "date": "2019-03-23T01:09:46.296404",
+        "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 44812258784861134719",
+        "to": "Счет 74489636417521191160",
+    }
+
+
+@pytest.fixture
+def rub_transaction_two() -> dict[str, Any]:
+    """
+    Фикстура со второй транзакцией в валюте RUB
+    :return: транзакция
+    """
+    return {
+        "id": 594226727,
+        "state": "CANCELED",
+        "date": "2018-09-12T21:27:25.241689",
+        "operationAmount": {"amount": "67314.70", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод организации",
+        "from": "Visa Platinum 1246377376343588",
+        "to": "Счет 14211924144426031657",
+    }
+
+
+@pytest.fixture
+def transactions_no_operation_amount() -> list[dict[str, Any]]:
+    """
+    Фикстура со списком транзакций, где нет operationAmount
+    :return: список транзакций
+    """
+    return [
+        {
+            "id": 895315941,
+            "state": "EXECUTED",
+            "date": "2018-08-19T04:27:37.904916",
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 6831982476737658",
+            "to": "Visa Platinum 8990922113665229",
+        },
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+    ]
+
+
+@pytest.fixture
+def transactions_no_currency() -> list[dict[str, Any]]:
+    """
+    Фикстура со списком транзакций, где нет currency
+    :return: список транзакций
+    """
+    return [
+        {
+            "id": 895315941,
+            "state": "EXECUTED",
+            "date": "2018-08-19T04:27:37.904916",
+            "operationAmount": {
+                "amount": "56883.54",
+            },
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 6831982476737658",
+            "to": "Visa Platinum 8990922113665229",
+        },
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "operationAmount": {
+                "amount": "67314.70",
+            },
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+    ]
+
+
+@pytest.fixture
+def transactions_no_currency_code() -> list[dict[str, Any]]:
+    """
+    Фикстура со списком транзакций, где нет кода валюты
+    :return: список транзакций
+    """
+    return [
+        {
+            "id": 895315941,
+            "state": "EXECUTED",
+            "date": "2018-08-19T04:27:37.904916",
+            "operationAmount": {
+                "amount": "56883.54",
+                "currency": {
+                    "name": "USD",
+                },
+            },
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 6831982476737658",
+            "to": "Visa Platinum 8990922113665229",
+        },
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "operationAmount": {
+                "amount": "67314.70",
+                "currency": {
+                    "name": "руб.",
+                },
+            },
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+    ]
