@@ -1,3 +1,4 @@
+import datetime
 from functools import wraps
 from typing import Any, Callable, ParamSpec, TypeVar
 
@@ -5,7 +6,7 @@ F_Spec = ParamSpec("F_Spec")
 F_Return = TypeVar("F_Return")
 
 
-def log(filename: str | None) -> Any:
+def log(filename: str | None = None) -> Any:
     """
     Декоратор, который может логировать работу функции
     и ее результат как в файл, так и в консоль
@@ -18,10 +19,33 @@ def log(filename: str | None) -> Any:
     ) -> Callable[F_Spec, F_Return]:  # функция с теми же входными аргументами
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
-            result = func(*args, **kwargs)
+            start_datetime = datetime.datetime.now()
+
+            log_text = f"""
+{start_datetime.strftime("%Y-%m-%d %H:%M:%S")}:
+Function {func.__name__} called with args: {args} and kwargs: {kwargs}.
+"""
+
+            try:
+                result = func(*args, **kwargs)
+            except Exception as e:
+                log_text += f"""Error: {e}
+"""
+                if filename is None:
+                    print(log_text)
+                else:
+                    with open(filename, "a", encoding="utf-8") as file:
+                        file.write(log_text + "\n")
+
+            end_datetime = datetime.datetime.now()
+            log_text += f"""Execution time: {end_datetime - start_datetime}. Result: {result}
+"""
 
             if filename is None:
-                print(f"Function {func.__name__} called with " f"args: {args} and kwargs: {kwargs}. Result: {result}")
+                print(log_text)
+            else:
+                with open(filename, "a", encoding="utf-8") as file:
+                    file.write(log_text + "\n")
 
             return result
 
