@@ -1,7 +1,3 @@
-from src import decorators
-
-
-@decorators.log()
 def get_mask_card_number(card_number: int) -> str:
     """
     Функция маскировки номера банковской карты

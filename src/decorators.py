@@ -38,7 +38,8 @@ Function {func.__name__} called with args: {args} and kwargs: {kwargs}.
                         file.write(log_text + "\n")
 
             end_datetime = datetime.datetime.now()
-            log_text += f"""Execution time: {end_datetime - start_datetime}. Result: {result}
+            res_execute_time = str(end_datetime - start_datetime)[:12]
+            log_text += f"""Execution time: {res_execute_time}. Result: {result}
 """
 
             if filename is None:
