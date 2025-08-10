@@ -331,6 +331,65 @@
  0000 00000 0000 0005
  ```
 
+
+ ## Декораторы:
+ ### Декоратор **log**(filename: str | None = None) -> Any
+  Декоратор, который может логировать работу функции
+  и ее результат как в файл, так и в консоль
+
+ #### Пример использования (запись в консоль): 
+```
+ import decorators
+
+ @decorators.log()
+ def add_numbers(a: int | float, b: int | float) -> int | float:
+     """
+     Функция для тестирования декоратора
+     Просто складывает два числа
+     :param a: первое число
+     :param b: второе число
+     :return: сумма чисел a и b
+     """
+     return a + b 
+
+ result = add_numbers(3, 5)
+ ```
+ #### Пример работы (запись в консоль):
+ ```
+ 
+2025-08-03 15:41:48:
+Function add_numbers called with args: (3, 5) and kwargs: {}.
+Execution time: 0:00:00.0033. Result: 8
+
+ ```
+ #### Пример использования (запись в файл): 
+```
+import decorators
+
+file_of_names = "my_log.txt"
+
+@decorators.log(file_of_names)
+def add_numbers(a: int | float, b: int | float) -> int | float:
+    """
+    Функция для тестирования декоратора
+    Просто складывает два числа
+    :param a: первое число
+    :param b: второе число
+    :return: сумма чисел a и b
+    """
+    return a + b
+ 
+result = add_numbers(3, 5)
+ ```
+ #### Пример работы (запись в файл):
+ ```
+
+2025-08-03 15:53:58:
+Function add_numbers called with args: (3, 5) and kwargs: {}.
+Execution time: 0:00:00.0010. Result: 8
+
+ ```
+
  ## Тестирование:
 Проект покрыт тестами фреймворка pytest. Для их запуска выполните команду:
 ```
