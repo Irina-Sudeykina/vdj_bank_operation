@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import Any
 
 from src import utils
 
@@ -23,3 +24,21 @@ def test_get_transactions_of_json_file(operations_json_file: str) -> None:
 
     assert utils.get_transactions_of_json_file("test") == []
     assert utils.get_transactions_of_json_file(bad_json_file) == []
+
+
+def test_get_amount_transaction(
+    transaction_amount_rub: dict[str, Any],
+    transaction_amount_usd: dict[str, Any],
+    transaction_amount_cny: dict[str, Any],
+) -> None:
+    """
+    Проверка работы функции get_amount_transaction, которая
+    принимает словрь с транзакцией и возвращает сумму транзакции в рублях
+    :param transaction_amount_rub: Фикстура словаря транзакции, где сумма в рублях
+    :param transaction_amount_usd: Фикстура словаря транзакции, где сумма в USD
+    :param transaction_amount_cny: Фикстура словаря транзакции, где сумма в CNY
+    :return: сумма транзакции в рублях
+    """
+    assert utils.get_amount_transaction(transaction_amount_rub) == 31957.58
+    assert utils.get_amount_transaction(transaction_amount_usd) == 0.0
+    assert utils.get_amount_transaction(transaction_amount_cny) == 8221.37

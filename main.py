@@ -103,3 +103,15 @@ if __name__ == "__main__":
     print(type(result))
 
     print(external_api.conversion_currency(100, "USD", "RUB"))
+
+    transaction = {
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2019-08-26T10:50:58.294041",
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
+        "desctiption": "Перевод организации",
+        "from": "Maestro 1569837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+    print(utils.get_amount_transaction(transaction))
