@@ -766,3 +766,48 @@ Function add_numbers called with args: {args} and kwargs: {kwargs}.
     log_text += """Error: unsupported operand type(s) for +: 'int' and 'str'
 """
     return log_text
+
+
+@pytest.fixture
+def operations_json_file() -> list[dict[str, Any]]:
+    """
+    Фикстура списка словарей из json файла с финансовыми операциями
+    :return: список финансовых операций
+    """
+    return [
+        {
+            "id": 441945886,
+            "state": "EXECUTED",
+            "date": "2019-08-26T10:50:58.294041",
+            "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
+            "desctiption": "Перевод организации",
+            "from": "Maestro 1569837868705199",
+            "to": "Счет 64686473678894779589",
+        },
+        {
+            "id": 41428829,
+            "state": "EXECUTED",
+            "date": "2019-07-03T18:35:29.512364",
+            "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}},
+            "desctiption": "Перевод организации",
+            "from": "MasterCard 7158300734726758",
+            "to": "Счет 35383033474447895560",
+        },
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+            "desctiption": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 1177661460593066702",
+        },
+        {
+            "id": 587085106,
+            "state": "EXECUTED",
+            "date": "2018-03-23T10:45:06.972075",
+            "operationAmount": {"amount": "48223,05", "currency": {"name": "руб.", "code": "RUB"}},
+            "desctiption": "Открытие вклада",
+            "to": "Счет 41421565395219882431",
+        },
+    ]

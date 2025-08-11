@@ -1,6 +1,13 @@
+import os
 from datetime import datetime
+from pathlib import Path
 
-from src import generators, masks, processing, widget
+from src import generators, masks, processing, utils, widget
+
+# Задаём корневой путь проекта.
+root_path = Path(__file__).resolve().parents[0]
+print(root_path)
+transactions_file = os.path.join(root_path, "data\\operations_03.json")
 
 if __name__ == "__main__":
     print(masks.get_mask_card_number(1234123412341234))
@@ -85,3 +92,12 @@ if __name__ == "__main__":
 
     for card_number in generators.card_number_generator(5, 5):
         print(card_number)
+
+    print(transactions_file)
+    result = utils.get_transactions_of_json_file(transactions_file)
+    print(result)
+    print(type(result))
+
+    result = utils.get_transactions_of_json_file("test")
+    print(result)
+    print(type(result))
