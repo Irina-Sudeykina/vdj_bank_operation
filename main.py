@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from src import generators, masks, processing, utils, widget
+from src import external_api, generators, masks, processing, utils, widget
 
 # Задаём корневой путь проекта.
 root_path = Path(__file__).resolve().parents[0]
@@ -101,3 +101,5 @@ if __name__ == "__main__":
     result = utils.get_transactions_of_json_file("test")
     print(result)
     print(type(result))
+
+    print(external_api.conversion_currency(100, "USD", "RUB"))
