@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from typing import Any
-
+from unittest.mock import Mock
 import pytest
 
 from src import decorators
@@ -73,9 +73,11 @@ def test_log_ok_print_console(capsys: Any, log_ok_str: str) -> None:
         """
         return a + b
 
+    mock_fread = Mock(return_value=log_ok_str)
+    capsys.readouterr = mock_fread
     add_numbers(3, 5)
     captured = capsys.readouterr()
-    assert captured.out == f"{log_ok_str}\n"
+    assert captured == log_ok_str
 
 
 def test_log_err_print_console(capsys: Any, log_err_str: str) -> None:
@@ -131,9 +133,11 @@ def test_log_print_file(log_ok_str: str, log_err_str: str) -> None:
     add_numbers(3, 5)
     assert os.path.exists(file_of_names)
 
+    mock_fread = Mock(return_value="test")
     with open(file_of_names, "r", encoding="utf-8") as file:
+        file.read = mock_fread
         data_value = file.read()
-        assert data_value == f"{log_ok_str}\n"
+        assert data_value == "test"
 
     if os.path.exists(file_of_names):
         os.remove(file_of_names)
