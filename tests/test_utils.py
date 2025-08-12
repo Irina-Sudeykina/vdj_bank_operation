@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from typing import Any
 from unittest.mock import patch
+
 from src import utils
 
 # Задаём корневой путь проекта.
@@ -10,8 +11,7 @@ file_of_names = os.path.join(root_path, "data\\operations_03.json")
 
 
 def test_get_amount_transaction(
-    transaction_amount_rub: dict[str, Any],
-    transaction_amount_cny: dict[str, Any]
+    transaction_amount_rub: dict[str, Any], transaction_amount_cny: dict[str, Any]
 ) -> None:
     """
     Проверка работы функции get_amount_transaction, которая

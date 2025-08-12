@@ -731,19 +731,13 @@ def log_ok_str() -> str:
     Фикстура лога при корректном срабатывании функции
     :return: строка лога
     """
-    start_datetime = datetime.now()
     args = (3, 5)
     kwargs = "{}"
 
     log_text = f"""
-{start_datetime.strftime("%Y-%m-%d %H:%M:%S")}:
+2025-08-13 03:16:45:
 Function add_numbers called with args: {args} and kwargs: {kwargs}.
-"""
-    result = 3 + 5
-    end_datetime = datetime.now()
-    res_execute_time = str(end_datetime - start_datetime)[:12]
-
-    log_text += f"""Execution time: {res_execute_time}. Result: {result}
+Execution time: 0:00:00. Result: 8
 """
     return log_text
 
