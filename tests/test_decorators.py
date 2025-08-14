@@ -1,6 +1,8 @@
 import os
+from datetime import datetime
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
 
 import pytest
 
@@ -73,9 +75,11 @@ def test_log_ok_print_console(capsys: Any, log_ok_str: str) -> None:
         """
         return a + b
 
-    add_numbers(3, 5)
-    captured = capsys.readouterr()
-    assert captured.out == f"{log_ok_str}\n"
+    with patch("datetime.datetime") as mock_datetime:
+        mock_datetime.now.return_value = datetime(2025, 8, 13, 3, 16, 45)
+        add_numbers(3, 5)
+        captured = capsys.readouterr()
+        assert captured.out == f"{log_ok_str}\n"
 
 
 def test_log_err_print_console(capsys: Any, log_err_str: str) -> None:
@@ -128,7 +132,9 @@ def test_log_print_file(log_ok_str: str, log_err_str: str) -> None:
     if os.path.exists(file_of_names):
         os.remove(file_of_names)
 
-    add_numbers(3, 5)
+    with patch("datetime.datetime") as mock_datetime:
+        mock_datetime.now.return_value = datetime(2025, 8, 13, 3, 16, 45)
+        add_numbers(3, 5)
     assert os.path.exists(file_of_names)
 
     with open(file_of_names, "r", encoding="utf-8") as file:
