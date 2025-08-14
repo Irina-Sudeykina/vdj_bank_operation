@@ -1,7 +1,17 @@
 import json
 from typing import Any
+import logging
 
 from src import external_api
+
+logging.basicConfig(filemode='w')
+
+logger = logging.getLogger("utils")
+logger.setLevel(logging.DEBUG)
+file_handler = logging.FileHandler("logs/utils.log", mode="w", encoding='utf-8')
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
 
 
 def get_transactions_of_json_file(json_file: str) -> list[dict[str, Any]]:
@@ -12,12 +22,16 @@ def get_transactions_of_json_file(json_file: str) -> list[dict[str, Any]]:
     :return: список словарей с данными о финансовых транзакциях
     """
     try:
+        logger.info(f"Открываем json файл {json_file} с транзакцтями на чтение")
         with open(json_file, mode="r", encoding="utf-8") as operations_file:
             try:
+                logger.info("Записываем содержимое json файла {json_file} в переменную operations_data")
                 operations_data = json.load(operations_file)
             except json.JSONDecodeError:
+                logger.error(f"Десериализация json файла {json_file} невозможна. Что-то с ним не так.")
                 return []
     except FileNotFoundError:
+        logger.error(f"Файл {json_file} не найден.")
         return []
 
     return list(operations_data)
@@ -30,11 +44,15 @@ def get_amount_transaction(transaction: dict[str, Any]) -> float:
     :return: сумма транзакции в рублях
     """
     amount = float(transaction.get("operationAmount", "").get("amount", 0))
+    logger.debug(f"Сумма транзакции: {amount}")
     currency = transaction.get("operationAmount", "").get("currency", "").get("code", "RUB")
+    logger.debug(f"Валюта транзакции: {currency}")
 
+    logger.info("Проверяем в какой валюте была транзакция")
     if currency == "RUB":
         result_amount = amount
     elif (currency == "USD") or (currency == "EUR"):
+        logger.info(f"Переводим валюту транзакции из {currency} в RUB")
         result_amount = external_api.conversion_currency(amount, currency, "RUB")
     else:
         result_amount = amount
