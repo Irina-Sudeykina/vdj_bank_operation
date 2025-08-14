@@ -332,6 +332,143 @@
  ```
 
 
+### Функция **conversion_currency**(amount: float, currency_from: str, currency_to: str) -> float:
+ Функция конвертации суммы из одной валюты в другую
+
+ #### Пример использования: 
+ ```
+ from src import external_api
+ 
+ print(external_api.conversion_currency(100, "USD", "RUB"))
+ ```
+ #### Пример работы:
+ ```
+ 8100.0
+ ```
+ 
+ 
+ ### Функция **get_transactions_of_json_file**(json_file: str) -> list[dict[str, Any]]:
+ Функция принимает на вход путь до JSON-файла
+ и возвращает список словарей с данными о финансовых транзакциях
+
+ #### Пример использования: 
+ ```
+ from src import utils
+  
+ print(utils.get_transactions_of_json_file("operations.json"))
+ ```
+ #### Пример работы:
+ ```
+[
+	{
+		"id": 441945886,
+		"state": "EXECUTED",
+		"date": "2019-08-26T10:50:58.294041",
+		"operationAmount": {
+			"amount": "31957.58",
+			"currency": {
+				"name": "руб.",
+				"code": "RUB"		
+			}
+		},
+		"desctiption": "Перевод организации",
+		"from": "Maestro 1569837868705199",
+		"to": "Счет 64686473678894779589"
+	},
+	{
+		"id": 41428829,
+		"state": "EXECUTED",
+		"date": "2019-07-03T18:35:29.512364",
+		"operationAmount": {
+			"amount": "8221.37",
+			"currency": {
+				"name": "USD",
+				"code": "USD"		
+			}
+		},
+		"desctiption": "Перевод организации",
+		"from": "MasterCard 7158300734726758",
+		"to": "Счет 35383033474447895560"
+	},
+	{
+		"id": 939719570,
+		"state": "EXECUTED",
+		"date": "2018-06-30T02:08:58.425572",
+		"operationAmount": {
+			"amount": "9824.07",
+			"currency": {
+				"name": "USD",
+				"code": "USD"		
+			}
+		},
+		"desctiption": "Перевод организации",
+		"from": "Счет 75106830613657916952",
+		"to": "Счет 1177661460593066702"
+	},
+	{
+		"id": 587085106,
+		"state": "EXECUTED",
+		"date": "2018-03-23T10:45:06.972075",
+		"operationAmount": {
+			"amount": "48223,05",
+			"currency": {
+				"name": "руб.",
+				"code": "RUB"		
+			}
+		},
+		"desctiption": "Открытие вклада",
+		"to": "Счет 41421565395219882431"
+	}
+]
+ ```
+
+
+### Функция **get_amount_transaction**(transaction: dict[str, Any]) -> float:
+ Функция принимает словрь с транзакцией и возвращает сумму транзакции в рублях
+
+ #### Пример использования: 
+ ```
+ from src import utils
+ 
+ transaction = {
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2019-08-26T10:50:58.294041",
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
+        "desctiption": "Перевод организации",
+        "from": "Maestro 1569837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+ print(utils.get_amount_transaction(transaction))
+ ```
+ #### Пример работы:
+ ```
+ 31957.58
+ ```
+ 
+ #### Пример использования: 
+ ```
+ from src import utils
+ 
+ transaction = {
+        "id": 41428829,
+        "state": "EXECUTED",
+        "date": "2019-07-03T18:35:29.512364",
+        "operationAmount": {"amount": "100", "currency": {"name": "USD", "code": "USD"}},
+        "desctiption": "Перевод организации",
+        "from": "MasterCard 7158300734726758",
+        "to": "Счет 35383033474447895560",
+    }
+
+ print(utils.get_amount_transaction(transaction))
+ ```
+ #### Пример работы:
+ ```
+ 8100.0
+ ```
+
+
  ## Декораторы:
  ### Декоратор **log**(filename: str | None = None) -> Any
   Декоратор, который может логировать работу функции
