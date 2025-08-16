@@ -12,7 +12,7 @@ def get_operations_csv(csv_file: str) -> list[dict[str, Any]]:
     :return: список словарей с транзакциями
     """
     try:
-        df = pd.read_csv(csv_file)
+        df = pd.read_csv(csv_file, sep=";")
         # Преобразуем ключи к строковым типам
         result: list[dict[str, Any]] = [{str(k): v for k, v in record.items()} for record in df.to_dict("records")]
     except Exception:
