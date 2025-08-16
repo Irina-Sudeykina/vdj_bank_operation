@@ -1,10 +1,10 @@
 import logging
 
-logging.basicConfig(filemode='w')
+logging.basicConfig(filemode="w")
 
 logger = logging.getLogger("masks")
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler("logs/masks.log", mode="w", encoding='utf-8')
+file_handler = logging.FileHandler("logs/masks.log", mode="w", encoding="utf-8")
 file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
@@ -18,7 +18,7 @@ def get_mask_card_number(card_number: int) -> str:
     """
     logger.info(f"Проверяем номер карты: {card_number}")
     if len(str(card_number)) == 16:
-        logger.info(f"Возвращаем маскированный номер")
+        logger.info("Возвращаем маскированный номер")
         return f"{str(card_number)[0:4]} {str(card_number)[4:6]}** **** {str(card_number)[-4:]}"
     else:
         logger.error(f"Задан неверный номер карты: {card_number}")
