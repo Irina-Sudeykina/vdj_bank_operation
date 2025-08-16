@@ -11,9 +11,12 @@ def get_operations_csv(csv_file: str) -> list[dict[str, Any]]:
     :param csv_file: путь к файлу CSV
     :return: список словарей с транзакциями
     """
-    df = pd.read_csv(csv_file)
-    # Преобразуем ключи к строковым типам
-    result: list[dict[str, Any]] = [{str(k): v for k, v in record.items()} for record in df.to_dict("records")]
+    try:
+        df = pd.read_csv(csv_file)
+        # Преобразуем ключи к строковым типам
+        result: list[dict[str, Any]] = [{str(k): v for k, v in record.items()} for record in df.to_dict("records")]
+    except Exception:
+        result = []
     return result
 
 
@@ -25,7 +28,10 @@ def get_operations_xlsx(xlsx_file: str) -> list[dict[Any, Any]]:
     :param xlsx_file: путь к файлу XLSX
     :return: список словарей с транзакциями
     """
-    df = pd.read_excel(xlsx_file)
-    # Преобразуем ключи к строковым типам
-    result: list[dict[str, Any]] = [{str(k): v for k, v in record.items()} for record in df.to_dict("records")]
+    try:
+        df = pd.read_excel(xlsx_file)
+        # Преобразуем ключи к строковым типам
+        result: list[dict[str, Any]] = [{str(k): v for k, v in record.items()} for record in df.to_dict("records")]
+    except Exception:
+        result = []
     return result
