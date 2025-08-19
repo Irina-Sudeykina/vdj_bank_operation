@@ -469,6 +469,90 @@
  ```
 
 
+### Функция **get_operations_csv**(csv_file: str) -> list[dict[str, Any]]:
+ Функция для считывания финансовых операций из CSV
+ принимает путь к файлу CSV в качестве аргумента
+ возвращает список словарей с транзакциями
+
+ #### Пример использования: 
+ ```
+ from src import extractors
+
+ if __name__ == "__main__":
+    result = get_operations_csv("transactions.csv")
+    print(result)
+ ```
+ #### Пример работы:
+ ```
+ [
+	{
+		'id': 2177828.0, 
+		'state': 'EXECUTED', 
+		'date': '2022-04-14T15:14:21Z', 
+		'amount': 24853.0, 
+		'currency_name': 
+		'Yuan Renminbi', 
+		'currency_code': 'CNY', 
+		'from': 'Счет 38577962752140632721', 
+		'to': 'Счет 47657753885349826314', 
+		'description': 'Перевод со счета на счет'}, 
+	{
+		'id': 4137938.0, 
+		'state': 'EXECUTED', 
+		'date': '2023-01-04T13:13:34Z', 
+		'amount': 15560.0, 
+		'currency_name': 'Real', 
+		'currency_code': 'BRL', 
+		'from': nan, 
+		'to': 'Счет 38164279390569873521', 
+		'description': 'Открытие вклада'
+	}
+]
+ ```
+ 
+ 
+### Функция **get_operations_xlsx**(xlsx_file: str) -> list[dict[Any, Any]]:
+ Функция для считывания финансовых операций из XLSX
+ принимает путь к файлу CSV в качестве аргумента
+ возвращает список словарей с транзакциями
+
+ #### Пример использования: 
+ ```
+ from src import extractors
+
+ if __name__ == "__main__":
+    result = get_operations_xlsx("transactions_excel.xlsx")
+    print(result)
+ ```
+ #### Пример работы:
+ ```
+ [
+	{
+		'id': 2177828.0, 
+		'state': 'EXECUTED', 
+		'date': '2022-04-14T15:14:21Z', 
+		'amount': 24853.0, 
+		'currency_name': 
+		'Yuan Renminbi', 
+		'currency_code': 'CNY', 
+		'from': 'Счет 38577962752140632721', 
+		'to': 'Счет 47657753885349826314', 
+		'description': 'Перевод со счета на счет'}, 
+	{
+		'id': 4137938.0, 
+		'state': 'EXECUTED', 
+		'date': '2023-01-04T13:13:34Z', 
+		'amount': 15560.0, 
+		'currency_name': 'Real', 
+		'currency_code': 'BRL', 
+		'from': nan, 
+		'to': 'Счет 38164279390569873521', 
+		'description': 'Открытие вклада'
+	}
+]
+ ```
+
+
  ## Декораторы:
  ### Декоратор **log**(filename: str | None = None) -> Any
   Декоратор, который может логировать работу функции
