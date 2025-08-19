@@ -50,3 +50,29 @@ def test_sort_by_date(
 
     assert processing.sort_by_date(operation_list_no_date) == operation_list_no_date
     assert processing.sort_by_date([]) == []
+
+
+def test_process_bank_search(
+    transactions_all: list[dict[str, Any]],
+    transactions_organization_transfer: list[dict[str, Any]],
+    transactions_on_the_card: list[dict[str, Any]],
+    transactions_no_description: list[dict[str, Any]],
+) -> None:
+    """
+    Проверка работы функции process_bank_search,
+    которая принимает список словарей с данными о банковских операциях и строку поиска,
+    и возвращает список словарей, у которых в описании есть данная строка.
+    :param transactions_all: Фикстура с полным списком транзакций
+    :param transactions_organization_transfer: Фикстура со списком транзакций, с описанием - Перевод организации
+    :param transactions_on_the_card: Фикстура со списком транзакций с описанием, содержащим - на карту
+    :param transactions_no_description: Фикстура со списком транзакций, где нет описания
+    :return: отфильтрованный список словарей с данными о банковских операциях
+    """
+    assert processing.process_bank_search(transactions_all, "Перевод организации") == transactions_organization_transfer
+    assert processing.process_bank_search(transactions_all, "на карту") == transactions_on_the_card
+    assert processing.process_bank_search(transactions_all) == transactions_all
+    assert processing.process_bank_search(transactions_all, "test") == []
+    assert processing.process_bank_search(transactions_all, "перевод организации") == transactions_organization_transfer
+
+    assert processing.process_bank_search(transactions_no_description, "на карту") == []
+    assert processing.process_bank_search([]) == []

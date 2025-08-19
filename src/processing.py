@@ -1,3 +1,4 @@
+import re
 from typing import Any
 
 
@@ -24,3 +25,15 @@ def sort_by_date(operation_list: list[dict[str, Any]], is_reverse_sort: bool = T
     :return: отсортированный по дате список словарей - банковские операции
     """
     return sorted(operation_list, key=lambda tpl: tpl.get("date", ""), reverse=is_reverse_sort)
+
+
+def process_bank_search(data: list[dict], search: str = "") -> list[dict]:
+    """
+    Функция принимает список словарей с данными о банковских операциях и строку поиска,
+    и возвращает список словарей, у которых в описании есть данная строка.
+    :param data: список словарей с данными о банковских операциях
+    :param search: строка поиска
+    :return: отфильтрованный список словарей с данными о банковских операциях
+    """
+    pattern = re.compile(rf"{search.lower()}")
+    return [i for i in data if re.findall(pattern, str(i.get("description")).lower())]
