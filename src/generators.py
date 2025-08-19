@@ -10,11 +10,14 @@ def filter_by_currency(transaction_list: list[dict[str, Any]], currency: str = "
     :param currency: валюта операции (например, USD)
     :return: итератор с словарей
     """
-    return (
-        x
-        for x in transaction_list
-        if x.get("operationAmount", "").get("currency", "").get("code", "").upper() == currency.upper()
-    )
+    if transaction_list[0].get("operationAmount", "") != "":
+        return (
+            x
+            for x in transaction_list
+            if x.get("operationAmount", "").get("currency", "").get("code", "").upper() == currency.upper()
+        )
+    else:
+        return (x for x in transaction_list if x.get("currency_code", "") == currency.upper())
 
 
 def transaction_descriptions(transaction_list: list[dict[str, Any]]) -> Generator[str]:
