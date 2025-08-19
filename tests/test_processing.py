@@ -68,11 +68,40 @@ def test_process_bank_search(
     :param transactions_no_description: Фикстура со списком транзакций, где нет описания
     :return: отфильтрованный список словарей с данными о банковских операциях
     """
-    assert processing.process_bank_search(transactions_all, "Перевод организации") == transactions_organization_transfer
+    assert (
+        processing.process_bank_search(transactions_all, "Перевод организации") == transactions_organization_transfer
+    )
     assert processing.process_bank_search(transactions_all, "на карту") == transactions_on_the_card
     assert processing.process_bank_search(transactions_all) == transactions_all
     assert processing.process_bank_search(transactions_all, "test") == []
-    assert processing.process_bank_search(transactions_all, "перевод организации") == transactions_organization_transfer
+    assert (
+        processing.process_bank_search(transactions_all, "перевод организации") == transactions_organization_transfer
+    )
 
     assert processing.process_bank_search(transactions_no_description, "на карту") == []
     assert processing.process_bank_search([]) == []
+
+
+def test_process_bank_operations(
+    transactions_all: list[dict[str, Any]],
+    categories_list: list[str],
+    categories_counter: dict[str, Any],
+    transactions_no_description: list[dict[str, Any]],
+) -> None:
+    """
+    Проверка работы функции process_bank_operations,
+    принимает список словарей с данными о банковских операциях и список категорий операций
+    и возвращает словарь, в котором ключи — это названия категорий,
+    а значения — это количество операций в каждой категории
+    :param transactions_all: Фикстура с полным списком транзакций
+    :param categories_list: Фикстура со списком категорий операций
+    :param categories_counter: Фикстура со словарем c количеством операций в каждой категории
+    :param transactions_no_description: Фикстура со списком транзакций, где нет описания (категории)
+    :return: словарь c количеством операций в каждой категории
+    """
+    assert processing.process_bank_operations(transactions_all, categories_list) == categories_counter
+    assert processing.process_bank_operations(transactions_all, []) == {}
+    assert processing.process_bank_operations(transactions_all, ["test"]) == {}
+
+    assert processing.process_bank_operations(transactions_no_description, categories_list) == {}
+    assert processing.process_bank_operations([], []) == {}

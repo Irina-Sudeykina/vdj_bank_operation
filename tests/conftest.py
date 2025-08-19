@@ -903,3 +903,21 @@ def transactions_on_the_card() -> list[dict[str, Any]]:
             "to": "Visa Platinum 8990922113665229",
         },
     ]
+
+
+@pytest.fixture
+def categories_list() -> list[str]:
+    """
+    Фикстура со списком категорий операций
+    :return: список категорий операций
+    """
+    return ["Перевод организации", "Перевод со счета на счет"]
+
+
+@pytest.fixture
+def categories_counter() -> dict[str, Any]:
+    """
+    Фикстура со словарем c количеством операций в каждой категории
+    :return: словарь c количеством операций в каждой категории
+    """
+    return {"перевод организации": 2, "перевод со счета на счет": 2}

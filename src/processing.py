@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 from typing import Any
 
 
@@ -37,3 +38,23 @@ def process_bank_search(data: list[dict], search: str = "") -> list[dict]:
     """
     pattern = re.compile(rf"{search.lower()}")
     return [i for i in data if re.findall(pattern, str(i.get("description")).lower())]
+
+
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    """
+    Функция принимает список словарей с данными о банковских операциях и список категорий операций
+    и возвращает словарь, в котором ключи — это названия категорий,
+    а значения — это количество операций в каждой категории
+    :param data: список словарей с данными о банковских операциях
+    :param categories: список категорий операций
+    :return: словарь c количеством операций в каждой категории
+    """
+    # Приведём категории к нижнему регистру и уберём лишние пробелы
+    categories_lower = [category.lower().strip() for category in categories]
+
+    # Получаем список подходящих категорий
+    descriptions_list = [
+        str(i.get("description")).lower() for i in data if str(i.get("description")).lower() in categories_lower
+    ]
+
+    return dict(Counter(descriptions_list))
