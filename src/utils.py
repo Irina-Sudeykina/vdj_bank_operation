@@ -27,6 +27,26 @@ def get_transactions_of_json_file(json_file: str) -> list[dict[str, Any]]:
             try:
                 logger.info("Записываем содержимое json файла {json_file} в переменную operations_data")
                 operations_data = json.load(operations_file)
+                operations_data = list(operations_data)
+                operations_data_result = []
+                for i in operations_data:
+                    if len(i) != 0:
+                        operations_data_result.append(
+                            {
+                                "id": i.get("id"),
+                                "state": i.get("state", ""),
+                                "date": i.get("date", ""),
+                                "amount": i.get("operationAmount", "").get("amount"),
+                                "currency_name": i.get("operationAmount", "").get("currency", "").get("name", ""),
+                                "currency_code": i.get("operationAmount", "")
+                                .get("currency", "")
+                                .get("code", "")
+                                .upper(),
+                                "from": i.get("from", ""),
+                                "to": i.get("to", ""),
+                                "description": i.get("description", ""),
+                            }
+                        )
             except json.JSONDecodeError:
                 logger.error(f"Десериализация json файла {json_file} невозможна. Что-то с ним не так.")
                 return []
@@ -34,7 +54,7 @@ def get_transactions_of_json_file(json_file: str) -> list[dict[str, Any]]:
         logger.error(f"Файл {json_file} не найден.")
         return []
 
-    return list(operations_data)
+    return operations_data_result
 
 
 def get_amount_transaction(transaction: dict[str, Any]) -> float:
