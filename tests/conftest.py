@@ -773,36 +773,45 @@ def operations_json_file() -> list[dict[str, Any]]:
             "id": 441945886,
             "state": "EXECUTED",
             "date": "2019-08-26T10:50:58.294041",
-            "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
-            "desctiption": "Перевод организации",
+            "amount": "31957.58",
+            "currency_name": "руб.",
+            "currency_code": "RUB",
             "from": "Maestro 1569837868705199",
             "to": "Счет 64686473678894779589",
+            "description": "Перевод организации",
         },
         {
             "id": 41428829,
             "state": "EXECUTED",
             "date": "2019-07-03T18:35:29.512364",
-            "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}},
-            "desctiption": "Перевод организации",
+            "amount": "8221.37",
+            "currency_name": "USD",
+            "currency_code": "USD",
             "from": "MasterCard 7158300734726758",
             "to": "Счет 35383033474447895560",
+            "description": "Перевод организации",
         },
         {
             "id": 939719570,
             "state": "EXECUTED",
             "date": "2018-06-30T02:08:58.425572",
-            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-            "desctiption": "Перевод организации",
+            "amount": "9824.07",
+            "currency_name": "USD",
+            "currency_code": "USD",
             "from": "Счет 75106830613657916952",
             "to": "Счет 1177661460593066702",
+            "description": "Перевод организации",
         },
         {
             "id": 587085106,
             "state": "EXECUTED",
             "date": "2018-03-23T10:45:06.972075",
-            "operationAmount": {"amount": "48223,05", "currency": {"name": "руб.", "code": "RUB"}},
-            "desctiption": "Открытие вклада",
+            "amount": "48223,05",
+            "currency_name": "руб.",
+            "currency_code": "RUB",
+            "from": "",
             "to": "Счет 41421565395219882431",
+            "description": "Открытие вклада",
         },
     ]
 
@@ -856,3 +865,68 @@ def transaction_amount_cny() -> dict[str, Any]:
         "from": "MasterCard 7158300734726758",
         "to": "Счет 35383033474447895560",
     }
+
+
+@pytest.fixture
+def transactions_organization_transfer() -> list[dict[str, Any]]:
+    """
+    Фикстура со списком транзакций, с описанием - Перевод организации
+    :return: список транзакций
+    """
+    return [
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702",
+        },
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "operationAmount": {"amount": "67314.70", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+    ]
+
+
+@pytest.fixture
+def transactions_on_the_card() -> list[dict[str, Any]]:
+    """
+    Фикстура со списком транзакций с описанием, содержащим - на карту
+    :return: список транзакций
+    """
+    return [
+        {
+            "id": 895315941,
+            "state": "EXECUTED",
+            "date": "2018-08-19T04:27:37.904916",
+            "operationAmount": {"amount": "56883.54", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 6831982476737658",
+            "to": "Visa Platinum 8990922113665229",
+        },
+    ]
+
+
+@pytest.fixture
+def categories_list() -> list[str]:
+    """
+    Фикстура со списком категорий операций
+    :return: список категорий операций
+    """
+    return ["Перевод организации", "Перевод со счета на счет"]
+
+
+@pytest.fixture
+def categories_counter() -> dict[str, Any]:
+    """
+    Фикстура со словарем c количеством операций в каждой категории
+    :return: словарь c количеством операций в каждой категории
+    """
+    return {"перевод организации": 2, "перевод со счета на счет": 2}

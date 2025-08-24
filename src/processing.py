@@ -1,3 +1,5 @@
+import re
+from collections import Counter
 from typing import Any
 
 
@@ -24,3 +26,35 @@ def sort_by_date(operation_list: list[dict[str, Any]], is_reverse_sort: bool = T
     :return: отсортированный по дате список словарей - банковские операции
     """
     return sorted(operation_list, key=lambda tpl: tpl.get("date", ""), reverse=is_reverse_sort)
+
+
+def process_bank_search(data: list[dict], search: str = "") -> list[dict]:
+    """
+    Функция принимает список словарей с данными о банковских операциях и строку поиска,
+    и возвращает список словарей, у которых в описании есть данная строка.
+    :param data: список словарей с данными о банковских операциях
+    :param search: строка поиска
+    :return: отфильтрованный список словарей с данными о банковских операциях
+    """
+    pattern = re.compile(rf"{search.lower()}")
+    return [i for i in data if re.findall(pattern, str(i.get("description")).lower())]
+
+
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    """
+    Функция принимает список словарей с данными о банковских операциях и список категорий операций
+    и возвращает словарь, в котором ключи — это названия категорий,
+    а значения — это количество операций в каждой категории
+    :param data: список словарей с данными о банковских операциях
+    :param categories: список категорий операций
+    :return: словарь c количеством операций в каждой категории
+    """
+    # Приведём категории к нижнему регистру и уберём лишние пробелы
+    categories_lower = [category.lower().strip() for category in categories]
+
+    # Получаем список подходящих категорий
+    descriptions_list = [
+        str(i.get("description")).lower() for i in data if str(i.get("description")).lower() in categories_lower
+    ]
+
+    return dict(Counter(descriptions_list))

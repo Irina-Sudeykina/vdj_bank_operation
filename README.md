@@ -551,6 +551,132 @@
 	}
 ]
  ```
+ 
+### Функция **process_bank_search**(data: list[dict], search: str = "") -> list[dict]:
+ Функция принимает список словарей с данными о банковских операциях и строку поиска,
+ и возвращает список словарей, у которых в описании есть данная строка.
+
+ #### Пример использования: 
+ ```
+ from src import processing
+ 
+ transactions = [
+    {
+        "id": 939719570,
+        "state": "EXECUTED",
+        "date": "2018-06-30T02:08:58.425572",
+        "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+        "description": "Перевод организации",
+        "from": "Счет 75106830613657916952",
+        "to": "Счет 11776614605963066702",
+    },
+    {
+        "id": 142264268,
+        "state": "EXECUTED",
+        "date": "2019-04-04T23:20:05.206878",
+        "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 19708645243227258542",
+        "to": "Счет 75651667383060284188",
+    },
+    {
+        "id": 873106923,
+        "state": "EXECUTED",
+        "date": "2019-03-23T01:09:46.296404",
+        "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 44812258784861134719",
+        "to": "Счет 74489636417521191160",
+    },
+]
+
+ if __name__ == "__main__":
+    result = processing.process_bank_search(transactions, "на счет")
+    print(result)
+ ```
+ #### Пример работы:
+ ```
+ [
+    {
+        "id": 142264268,
+        "state": "EXECUTED",
+        "date": "2019-04-04T23:20:05.206878",
+        "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 19708645243227258542",
+        "to": "Счет 75651667383060284188",
+    },
+    {
+        "id": 873106923,
+        "state": "EXECUTED",
+        "date": "2019-03-23T01:09:46.296404",
+        "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 44812258784861134719",
+        "to": "Счет 74489636417521191160",
+    },
+]
+ ```
+ 
+ 
+ ### Функция **process_bank_operations**(data: list[dict], categories: list) -> dict:
+ Функция принимает список словарей с данными о банковских операциях и список категорий операций
+ и возвращает словарь, в котором ключи — это названия категорий,
+ а значения — это количество операций в каждой категории
+
+ #### Пример использования: 
+ ```
+ from src import processing
+ 
+ transactions = [
+    {
+        "id": 939719570,
+        "state": "EXECUTED",
+        "date": "2018-06-30T02:08:58.425572",
+        "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+        "description": "Перевод организации",
+        "from": "Счет 75106830613657916952",
+        "to": "Счет 11776614605963066702",
+    },
+    {
+		'id': 4137938.0, 
+		'state': 'EXECUTED', 
+		'date': '2023-01-04T13:13:34Z', 
+		'amount': 15560.0, 
+		'currency_name': 'Real', 
+		'currency_code': 'BRL', 
+		'from': nan, 
+		'to': 'Счет 38164279390569873521', 
+		'description': 'Открытие вклада'
+	},
+    {
+        "id": 142264268,
+        "state": "EXECUTED",
+        "date": "2019-04-04T23:20:05.206878",
+        "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 19708645243227258542",
+        "to": "Счет 75651667383060284188",
+    },
+    {
+        "id": 873106923,
+        "state": "EXECUTED",
+        "date": "2019-03-23T01:09:46.296404",
+        "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 44812258784861134719",
+        "to": "Счет 74489636417521191160",
+    },
+]
+
+ if __name__ == "__main__":
+    result = processing.process_bank_search(transactions, ["Перевод организации", "Перевод со счета на счет"])
+    print(result)
+ ```
+ #### Пример работы:
+ ```
+{"перевод организации": 1, "перевод со счета на счет": 2}
+ ```
 
 
  ## Декораторы:
